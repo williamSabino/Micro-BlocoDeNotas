@@ -19,7 +19,7 @@ public class Nota {
     private String titulo;
     @Column(name = "texto")
     private String texto;
-    @Column(name = "usuarioId")
+    @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
 
     public Nota(ListagemNotasDto nota) {

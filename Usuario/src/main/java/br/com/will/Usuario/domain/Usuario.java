@@ -23,7 +23,7 @@ public class Usuario {
     private String nome;
     @Column(name = "idade")
     private Long idade;
-    @Column(name = "QtdeNotas")
+    @Column(name = "qtde_notas")
     private int qtdeNotas;
 
     public Usuario(UsuarioDto usuario) {
