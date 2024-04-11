@@ -37,7 +37,14 @@ public class UsuarioController {
     @PutMapping("/qtdeNotas/{id}")
     @Transactional
     public ResponseEntity alterarQtdeId(@PathVariable Long id){
-        System.out.println("################ caiu");
         return service.alterarQtdeId(id);
     }
+
+    @PutMapping("/qtdeNotasMenos/{id}")
+    @Transactional
+    public ResponseEntity subtrairQtdeNotas(@PathVariable Long id){
+        return service.subtrairQtdeNotas(id);
+    }
+
+
 }

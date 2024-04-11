@@ -2,7 +2,6 @@ package br.com.will.Usuario.domain;
 
 import br.com.will.Usuario.dto.UsuarioDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,4 +48,6 @@ public class Usuario {
     public void atualizarQtdeNOtas() {
         this.qtdeNotas += 1;
     }
+
+    public void subtrairQtdeNotas() { this.qtdeNotas -= 1;}
 }

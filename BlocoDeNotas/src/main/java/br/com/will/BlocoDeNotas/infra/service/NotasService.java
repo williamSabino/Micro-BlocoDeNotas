@@ -1,14 +1,10 @@
 package br.com.will.BlocoDeNotas.infra.service;
 
 import br.com.will.BlocoDeNotas.clients.UsuarioClient;
-import br.com.will.BlocoDeNotas.repositry.NotasRepository;
 import br.com.will.BlocoDeNotas.domain.Nota;
 import br.com.will.BlocoDeNotas.dto.ListagemNotasDto;
+import br.com.will.BlocoDeNotas.repositry.NotasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +29,7 @@ public class NotasService {
     public ResponseEntity inserirNota(ListagemNotasDto notaDto) {
         Nota nota = new Nota(notaDto);
         repository.save(nota);
-        client.alterarQtdeId(nota.getUsuarioId());
+        client.adicionarQtdeNotas(nota.getUsuarioId());
         return ResponseEntity.created(URI.create("localhost:8084/notas")).build();
     }
 
@@ -44,8 +40,10 @@ public class NotasService {
     }
 
     public ResponseEntity deletarNota(Long id) {
-        if(!this.repository.existsById(id)){return ResponseEntity.badRequest().build();}
+        var nota = repository.findById(id);
+        if(nota.isEmpty()){return ResponseEntity.badRequest().build();}
         repository.deleteById(id);
+        client.subtrairQtdeNotas(nota.get().getUsuarioId());
         return ResponseEntity.ok().build();
     }
 }

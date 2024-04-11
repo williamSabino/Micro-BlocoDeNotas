@@ -47,4 +47,10 @@ public class UsuarioService {
         user.atualizarQtdeNOtas();
         return ResponseEntity.ok().body(user);
     }
+
+    public ResponseEntity subtrairQtdeNotas(Long id) {
+        var user = repository.getReferenceById(id);
+        user.subtrairQtdeNotas();
+        return ResponseEntity.ok().body(user);
+    }
 }
