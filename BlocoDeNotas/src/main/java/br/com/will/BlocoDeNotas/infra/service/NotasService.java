@@ -1,9 +1,14 @@
 package br.com.will.BlocoDeNotas.infra.service;
 
+import br.com.will.BlocoDeNotas.clients.UsuarioClient;
 import br.com.will.BlocoDeNotas.repositry.NotasRepository;
 import br.com.will.BlocoDeNotas.domain.Nota;
 import br.com.will.BlocoDeNotas.dto.ListagemNotasDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +19,8 @@ import java.util.List;
 public class NotasService {
     @Autowired
     private NotasRepository repository;
+    @Autowired
+    private UsuarioClient client;
 
     public ResponseEntity listar() {
         List<Nota> listaUsuarios = repository.findAll();
@@ -26,6 +33,7 @@ public class NotasService {
     public ResponseEntity inserirNota(ListagemNotasDto notaDto) {
         Nota nota = new Nota(notaDto);
         repository.save(nota);
+        client.alterarQtdeId(nota.getUsuarioId());
         return ResponseEntity.created(URI.create("localhost:8084/notas")).build();
     }
 

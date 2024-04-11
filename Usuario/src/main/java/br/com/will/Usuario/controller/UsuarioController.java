@@ -34,9 +34,10 @@ public class UsuarioController {
         return service.deletarUsuario(id);
     }
 
-    @PatchMapping("/qtdeNotas/{id}")
+    @PutMapping("/qtdeNotas/{id}")
     @Transactional
     public ResponseEntity alterarQtdeId(@PathVariable Long id){
+        System.out.println("################ caiu");
         return service.alterarQtdeId(id);
     }
 }

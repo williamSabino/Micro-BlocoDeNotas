@@ -15,6 +15,9 @@ public class GatewayConfig {
                         .filters(f -> f.addRequestHeader("hello", "world"))
                         .uri("http://localhost:8083/usuarios"))
                 .route(r -> r
+                        .path("/usuarios/qtdeNotas/")
+                        .uri("http://localhost:8083/usuarios/qtdeNotas/"))
+                .route(r -> r
                         .path("/notas")
                         .filters(f -> f.addRequestHeader("hello", "world"))
                         .uri("http://localhost:8084/notas"))

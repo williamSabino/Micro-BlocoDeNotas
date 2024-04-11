@@ -17,7 +17,7 @@ public class Usuario {
     private Long id;
     @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "password") @Max(255)
+    @Column(name = "password")
     private String password;
     @Column(name = "nome", unique = false, length = 100)
     private String nome;
